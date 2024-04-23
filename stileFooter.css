@@ -1,0 +1,68 @@
+ footer {
+        background-color: #b7dfe3;
+        color: #2319b6;
+        padding: 20px;
+        text-align: center;
+    }
+/* Footer dei social network */
+footer.social-icons {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px; /* Aggiungi spazio sopra */
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #ff0; /* Cambia colore al passaggio del mouse */
+}
+
+/* Footer dello sviluppatore */
+footer.social-developer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0; /* Fissa il footer in basso */
+    left: 0;
+    width: 100%;
+}
+
+.social-developer a {
+    color: #fff;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.social-developer a:hover {
+    color: #ff0; /* Cambia colore al passaggio del mouse */
+}
+.social-developer a:hover {
+    color: #ff0; /* Cambia colore al passaggio del mouse */
+}
+
+/* Colori personalizzati per le icone */
+.social-icons a:hover .fab.fa-twitch {
+    color: #9147ff; /* Colore personalizzato per Twitch */
+}
+
+.social-icons a:hover .fab.fa-instagram {
+    color: #ff5a7f; /* Colore personalizzato per Instagram */
+}
+
+.social-icons a:hover .fab.fa-tiktok {
+    color: #091111; /* Colore personalizzato per TikTok */
+}
+
+.social-icons a:hover .fab.fa-discord {
+    color: #7289da; /* Colore personalizzato per Discord */
+}

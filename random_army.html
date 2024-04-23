@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="stileFooter.css">
+<link rel="stylesheet" href="stileUnit.css">
+<link rel="stylesheet" href="stilePagina.css">
+<link rel="stylesheet" href="stileNav.css">
+<link rel="stylesheet" href="stileHeader.css">
+<title> Army Randomizer</title>
+
+</head>
+<body>
+<div class="navigation">
+    <button id="troopsTestButton">Troops</button>
+    <button id="potionsTestButton">Potion</button>
+</div>
+<div id="troopsResults" class="unit-container"></div>
+<div id="potionsResults" class="unit-container"></div>
+<script>
+// Dati delle truppe
+var troopsData = [
+    ["Barbarian", 1,"truppa","https://coc.guide/static/imgs/troop/barbarian.png"],
+    ["Archer", 1,"truppa","https://coc.guide/static/imgs/troop/archer.png"],
+    ["Giant", 5,"truppa","https://coc.guide/static/imgs/troop/giant.png"],
+    ["Wizard", 4,"truppa","https://coc.guide/static/imgs/troop/wizard.png"],
+    ["Dragon", 20,"truppa","https://coc.guide/static/imgs/troop/dragon.png"],
+    ["Ballon", 5,"truppa","https://coc.guide/static/imgs/troop/balloon.png"],
+    ["Babydragon", 10,"truppa","https://coc.guide/static/imgs/troop/babydragon.png"],
+    ["Ice-golem", 15,"truppa","https://coc.guide/static/imgs/troop/ice-golem.png"],
+    ["Apprentice-warden", 20,"truppa","https://coc.guide/static/imgs/troop/apprentice-warden.png"],
+    ["Root-rider", 20,"truppa","https://coc.guide/static/imgs/troop/root-rider.png"],
+    ["Electro-dragon", 30,"truppa","https://coc.guide/static/imgs/troop/electro-dragon.png"],
+    ["Wall-breaker", 2,"truppa","https://coc.guide/static/imgs/troop/wall-breaker.png"],
+    ["Goblin", 1,"truppa","https://coc.guide/static/imgs/troop/goblin.png"],
+    ["Yeti", 18,"truppa","https://coc.guide/static/imgs/troop/yeti.png"],
+    ["Bowler", 5,"truppa","https://coc.guide/static/imgs/troop/bowler.png"],
+    ["Witch", 12,"truppa","https://coc.guide/static/imgs/troop/warlock.png"],
+    ["Miner", 6,"truppa","https://coc.guide/static/imgs/troop/miner.png"],
+    ["Valkyrie", 8,"truppa","https://coc.guide/static/imgs/troop/warrior-girl.png"],
+    ["headhunter", 6,"truppa","https://coc.guide/static/imgs/troop/headhunter.png"],
+    ["P.E.K.K.A.", 25,"truppa","https://coc.guide/static/imgs/troop/pekka.png"],
+    ["Electro-titan ", 32,"truppa","https://coc.guide/static/imgs/troop/electro-titan.png"],
+    ["Minion", 2,"truppa","https://coc.guide/static/imgs/troop/gargoyle.png"],
+    ["Golem", 30,"truppa","https://coc.guide/static/imgs/troop/golem.png"],
+    ["Dragonrider", 25,"truppa","https://coc.guide/static/imgs/troop/dragon-rider.png"],
+    ["Healer", 14,"truppa","https://coc.guide/static/imgs/troop/healer.png"],
+    ["Hog-rider", 5,"truppa","https://coc.guide/static/imgs/troop/boar-rider.png"],
+    ["Lava-hound", 30,"truppa","https://coc.guide/static/imgs/troop/airdefenceseeker.png"],
+    ["Super barbarian", 5,"supertruppa","https://coc.guide/static/imgs/troop/elitebarbarian.png"],
+    ["Super archer", 12,"supertruppa","https://coc.guide/static/imgs/troop/elitearcher.png"],
+    ["Super dragon", 40,"supertruppa","https://coc.guide/static/imgs/troop/super-dragon.png"],
+    ["Super minion", 12,"supertruppa","https://coc.guide/static/imgs/troop/super-minion.png"],
+    ["Super giant", 10,"supertruppa","https://coc.guide/static/imgs/troop/elitegiant.png"],
+    ["Super bowler", 30,"supertruppa","https://coc.guide/static/imgs/troop/super-bowler.png"],
+    ["Super valkyrie", 20,"supertruppa","https://coc.guide/static/imgs/troop/elitevalkyrie.png"],
+    ["Super miner", 24,"supertruppa","https://coc.guide/static/imgs/troop/super-miner.png"],
+    ["Super witch", 40,"supertruppa","https://coc.guide/static/imgs/troop/head-witch.png"],
+    ["Roket balloon", 8,"supertruppa","https://coc.guide/static/imgs/troop/hastyballoon.png"],
+    ["Sneaky goblin", 3,"supertruppa","https://coc.guide/static/imgs/troop/elitegoblin.png"],
+    ["Inferno dragon ", 15,"supertruppa","https://coc.guide/static/imgs/troop/infernodragon.png"],
+    ["ice-hound", 40,"supertruppa","https://coc.guide/static/imgs/troop/ice-hound.png"],
+    ["Super Wizard", 10,"supertruppa","https://coc.guide/static/imgs/troop/super-wizard.png"],
+    ["Super wall-breaker", 8, "supertruppa","https://coc.guide/static/imgs/troop/elitewallbreaker.png"]
+];
+// Dati delle pozioni
+var potionsData = [
+    ["Rage", 2,"https://coc.guide/static/imgs/spell/haste.png"],
+    ["recall", 2,"https://coc.guide/static/imgs/spell/recall.png"],
+    ["Jump", 2,"https://coc.guide/static/imgs/spell/jump.png"],
+    ["Poison", 1,"https://coc.guide/static/imgs/spell/poison.png"],
+    ["Lightning", 1,"https://coc.guide/static/imgs/spell/lighningstorm.png"],
+    ["Earthquake", 1,"https://coc.guide/static/imgs/spell/earthquake.png"],
+    ["Haste", 1,"https://coc.guide/static/imgs/spell/speedup.png"],
+    ["Freeze", 1,"https://coc.guide/static/imgs/spell/freeze.png"],
+    ["Skeleton", 1,"https://coc.guide/static/imgs/spell/spawnskele.png"],
+    ["Bats", 1,"https://coc.guide/static/imgs/spell/spawnbats.png"],
+    ["Overgrowth", 2, "https://coc.guide/static/imgs/spell/overgrowth.png"],
+    ["Invisibility", 1,"https://coc.guide/static/imgs/spell/invisibility.png"],
+    ["Clone", 3,"https://coc.guide/static/imgs/spell/duplicate.png"],
+    ["Heal",2,"https://coc.guide/static/imgs/spell/healingwave.png"]
+];
+//seleziona truppe casuali
+function selectTroops() {
+    var selectedTroops = {};
+    var totalSpace = 0;
+    var superTroopCount = 0;
+    // Continua a selezionare truppe casuali fino a raggiungere 320 spazi
+    while (totalSpace < 320) {
+        var randomIndex = Math.floor(Math.random() * troopsData.length);
+        var selectedUnit = troopsData[randomIndex];
+        var unitName = selectedUnit[0];
+        var unitSpace = selectedUnit[1];
+        var unitType = selectedUnit[2];
+        // Verifica se l'unità selezionata è una supertruppa e se il numero massimo di supertruppe è già stato raggiunto
+        if (unitType === "supertruppa" && superTroopCount === 2) {
+            continue; // Salta questa iterazione e seleziona un'altra unità
+        }
+        // Controlla se l'unità è già stata selezionata
+        if (selectedTroops[unitName]) {
+            // Se l'unità è già stata selezionata, incrementa solo lo spazio totale
+            totalSpace += unitSpace;
+            selectedTroops[unitName + 'Count']++;
+        } else {
+            // Se l'unità non è stata ancora selezionata, aggiungila all'elenco e aggiorna lo spazio totale
+            selectedTroops[unitName] = true;
+            selectedTroops[unitName + 'Count'] = 1;
+            totalSpace += unitSpace;
+        }
+        // Incrementa il conteggio delle supertruppe se l'unità selezionata è una supertruppa
+        if (unitType === "supertruppa") {
+            superTroopCount++;
+        }
+    }
+    // Costruisce l'array di truppe 
+    var result = [];
+    for (var unitName in selectedTroops) {
+        if (unitName.endsWith('Count')) {
+            var count = selectedTroops[unitName];
+            var originalUnitName = unitName.replace('Count', '');
+            result.push([ (count > 1 ? ' ' + count : '') +' '+ originalUnitName , troopsData.find(unit => unit[0] === originalUnitName)[1], troopsData.find(unit => unit[0] === originalUnitName)[3]]);
+        }
+    }
+    return result;
+}
+// seleziona casualmente le pozioni
+function selectPotions() {
+    var selectedPotions = {};
+    var totalSpace = 0;
+    // Continua a selezionare pozioni casuali fino a raggiungere 11 spazi
+    while (totalSpace < 11) {
+        var randomIndex = Math.floor(Math.random() * potionsData.length);
+        var selectedPotion = potionsData[randomIndex];
+        var potionName = selectedPotion[0];
+        var potionSpace = selectedPotion[1];
+        var potionImg = selectedPotion[2];
+        
+        // Controlla se la pozione è già stata selezionata
+        if (selectedPotions[potionName]) {
+            // Se la pozione è già stata selezionata, incrementa solo lo spazio totale
+            totalSpace += potionSpace;
+            selectedPotions[potionName + 'Count']++;
+        } else {
+            // Se la pozione non è stata ancora selezionata, aggiungila all'elenco e aggiorna lo spazio totale
+            selectedPotions[potionName] = true;
+            selectedPotions[potionName + 'Count'] = 1;
+            totalSpace += potionSpace;
+        }
+    }
+    // Costruisce l'array 
+    var result = [];
+    for (var potionName in selectedPotions) {
+        if (potionName.endsWith('Count')) {
+            var count = selectedPotions[potionName];
+            var originalPotionName = potionName.replace('Count', '');
+            result.push([ ' ' + count +originalPotionName , potionsData.find(potion => potion[0] === originalPotionName)[1], potionsData.find(potion => potion[0] === originalPotionName)[2]]);
+        }
+    }
+    return result;
+}
+// esegue il test 
+function runTroopsTest() {
+    var selectedUnits = selectTroops();
+    displayTroopsResults(selectedUnits);
+}
+function runPotionsTest() {
+    var selectedPotions = selectPotions();
+    displayPotionsResults(selectedPotions);
+}
+//visualizza risultati del test 
+function displayTroopsResults(results) {
+  var html = "<h2></h2>"
+    results.forEach(function(unit) {
+        var unitName = unit[0];
+        var unitSpace = unit[1];
+        var unitImg = unit[2];
+        html += "<div class='unit'><p>" + unitName  + "</p>";
+        html += "<img src='" + unitImg + "' alt='" + unitName + "'></div>"; // Aggiungi l'immagine
+    });
+    document.getElementById("troopsResults").innerHTML = html;
+}
+function displayPotionsResults(results) {
+    var html = "<h2></h2>";
+    results.forEach(function(potion) {
+        var potionName = potion[0];
+        var potionSpace = potion[1];
+        var potionImg = potion[2];
+        html += "<div class='unit'><p>" + potionName  + "</p>";
+        html += "<img src='" + potionImg + "' alt='" + potionName + "'></div>"; 
+    });
+    document.getElementById("potionsResults").innerHTML = html;
+}
+document.getElementById("troopsTestButton").addEventListener("click", runTroopsTest);
+document.getElementById("potionsTestButton").addEventListener("click", runPotionsTest);
+</script>
+ <footer>
+<div class="social-icons">
+    <a href="https://www.twitch.tv/fabiegatw"><i class="fab fa-twitch"></i>
+    <a href="https://www.instagram.com/fabiegatw_/"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.tiktok.com/@fabiegatw"><i class="fab fa-tiktok"></i></a>
+    <a href="https://discord.gg/NjDvgvvX"></a><i class="fab fa-discord"></i>
+</div>
+    <p>Codice creatore : PIZ</p>
+</footer>
+</body>
+</html>
+
+

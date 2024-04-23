@@ -1,0 +1,41 @@
+.unit-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        background-color:  #8dc1ba;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: calc(100% - 20px);
+        margin-bottom: 20px;
+    }
+    .unit {
+        .unit {
+            width: 40px;
+            height: 40px; 
+            background-color: #4b52aa;
+            padding: 8px;
+            border-radius: 50%; 
+            box-shadow: 0 0 30px rgb(146 158 167);
+            text-align: center;
+            box-sizing: border-box;
+        }
+    }
+    .unit img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid #918fdf;;
+    }
+    .unit p {
+        font-size: 14px;
+        color: #1828b8; 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ombra del testo */
+        -webkit-text-stroke: 1px #3032c0; /* Contorno del testo */
+        width: 60px; /* Larghezza uguale al diametro dell'immagine */
+        text-align: center; /* Centra il testo all'interno del cerchietto */
+        overflow: hidden; /* Nasconde il testo in eccesso */
+        white-space: nowrap;
+        text-overflow: ellipsis; /* Aggiunge "..." se il testo è troppo lungo */
+    }
